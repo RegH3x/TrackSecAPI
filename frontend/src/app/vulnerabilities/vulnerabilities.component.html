@@ -1,0 +1,38 @@
+<br>
+<div style="text-align:center;">
+<a class="btn btn-warning text-center" routerLink="/projects/{{id}}" routerLinkActive="active" role="button">Back to the Project</a>
+&nbsp;&nbsp;
+<a class="btn btn-success text-center" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}" routerLinkActive="active" role="button">Back to the Endpoint</a>
+</div>
+<br>
+<p class="fs-5 fw-bold text-center"> List of all vulnerabilities
+<img src="/assets/img/vulnerability.png" alt="Logo" width="40" height="40">
+</p>
+<div class="container-md text-center mx-auto">
+    <div class="row row-cols-2 row-cols-lg-2">
+      <div class="col mx-auto">
+<table *ngFor="let v of Vulnerability" class="table table-responsive flex-wrap">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col">Name</th>
+<th scope="col">Consequence</th>
+<th scope="col">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">
+    <button type="button" class="btn btn-primary" alt="Show Vulnerability" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/vulnerabilities/{{v.id}}" routerLinkActive="active">View/Modify</button>
+</th>
+<td>{{v.vulName}}</td>
+<td>{{v.consequence}}</td>
+<td>{{v.vulState ? 'OPEN' : 'CLOSE'}}</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<br>
+<br>

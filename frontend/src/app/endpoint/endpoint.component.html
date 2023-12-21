@@ -1,0 +1,177 @@
+<br>
+<div style="text-align:center;">
+  <a class="btn btn-warning text-center" routerLink="/projects/{{id}}" routerLinkActive="active" role="button">Back to the Project</a>
+  &nbsp;&nbsp;
+  <a class="btn btn-success text-center" routerLink="/projects/{{id}}/endpoints" routerLinkActive="active" role="button">Show Endpoints</a>
+</div>
+<br>
+<div class="container mx-auto">
+    <div class="row row-cols-1 row-cols-lg-3 g-2 g-lg-3">
+        <div class="col mx-auto">
+            <div *ngFor="let e of Endpoint" class="p-3 border bg-light">
+                <p class="fs-5 fw-bold text-center"> Endpoint Card
+                    <img src="/assets/img/endpoint.png" alt="Logo" width="40" height="40">
+                </p>
+                <div class="card">
+                    <div class="card-header text-center">ID:&nbsp;{{e.id}}</div>
+                    <div class="card-body">
+                      <blockquote class="blockquote mb-0">
+                        <p><label for="PathUI" class="fs-6 fw-bold" style="color:rgb(32, 112, 16);">Path UI:&nbsp;</label>{{e.pathUI}}</p>
+                        <p><label for="Domain" class="fs-6 fw-bold" style="color:rgb(32, 112, 16);">Domain:&nbsp;</label>{{e.domain}}</p>
+                        <p><label for="Endpoint" class="fs-6 fw-bold" style="color:rgb(32, 112, 16);">Endpoint:&nbsp;</label>{{e.endpoint}}</p>
+                        <p>
+                        <label for="description" class="fs-6 fw-bold" style="color:rgb(32, 112, 16);">Description:&nbsp;</label>
+                        <textarea class="form-control" rows="5" id="desription">{{e.apiDescription}}</textarea>
+                        </p>
+                        <footer class="blockquote-footer" style="color:rgb(32, 112, 16);">Creation date:&nbsp;<cite style="color:rgb(0, 0, 0);" title="creationDate">{{e.creationDate}}</cite></footer>
+                        <p>
+                          <label for="ProjectId" style="color:rgb(32, 112, 16);" class="fs-6 fw-bold">Project ID:&nbsp;</label>{{e.projectId}}
+                        </p>
+                        <div style="text-align:center;">
+                          <button type="button" class="btn btn-danger" (click)="deleteEndpointById()" title="Delete Endpoint"><img src="/assets/img/delete.png" width="24" height="24"></button>
+                          &nbsp;&nbsp;
+                          <button type="button" class="btn btn-warning" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/editendpoint" routerLinkActive="active" title="Update Endpoint"><img src="/assets/img/edit.png" width="24" height="24"></button>
+                        </div>
+                    </blockquote>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header fw-bold text-center">Correlation Endpoints<img src="/assets/img/table.jpg" alt="Logo" width="50" height="30"></div>
+                    <div class="card-body text-center">
+                      <blockquote class="blockquote mb-0">
+                        <p class="fs-6 fw-bold text-left">
+                          <a class="btn btn-success" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/endpointcorr" routerLinkActive="active" href="#" role="button">Show</a>
+                        </p>
+                      </blockquote>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+
+
+
+
+        <div class="col mx-auto">
+            <div class="p-3 border bg-light">
+                <br>
+                <h6 class="fw-bold" style="color:rgb(52, 75, 202); text-align: center;">Insert a parameter&nbsp;<img src="/assets/img/parameter.png" width="30" height="30" class="d-inline-block align-text-top"></h6>
+                <br>
+                <form (ngSubmit)="createParameter()" [formGroup]="addParameterForm">
+                    <div fs-6 text-left>
+                      <label for="Nome" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="parameterName" formControlName="parameterName" placeholder="Write the name of the parameter" style="text-align:left;">
+                      <p *ngIf="!addParameterForm.get('parameterName')!.valid && addParameterForm.get('parameterName')!.touched">* Insert a name for the parameter</p>
+                    </div>
+                    <div fs-6 text-left>
+                      <label for="Note" class="form-label">Note</label>
+                      <input type="text" class="form-control" id="note" formControlName="note" placeholder="Write notes" style="height: 100px">
+                      <p *ngIf="!addParameterForm.get('note')!.valid && addParameterForm.get('note')!.touched">* Insert a note</p>
+                    </div>
+                    <br>
+                    <div style="text-align:center;">
+                    <button type="submit" class="btn btn-primary text-center" [disabled]="!this.addParameterForm.valid">Add</button>
+                    </div>
+                </form>
+                <br>
+                <br>
+                <div class="card text-center">
+                    <div class="card-header" style="color:rgb(52, 75, 202); text-align: center;">List parameters of the endpoint
+                        <img src="/assets/img/list.png" width="24" height="24" class="d-inline-block align-text-top">
+                    </div>
+                    <div class="card-body text-center">
+                      <blockquote class="blockquote mb-0">
+                        <a class="btn btn-primary text-center" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/parameters" routerLinkActive="active" role="button">Parameters</a>
+                      </blockquote>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="card">
+                    <div class="card-header fw-bold text-center">Correlation Table<img src="/assets/img/table.jpg" alt="Logo" width="50" height="30"></div>
+                    <div class="card-body">
+                      <blockquote class="blockquote mb-0">
+                        <p class="fs-6 fw-bold text-center" style="color:rgb(223, 146, 30);">Vulnerabilities Parameters Table
+                        <br>
+                        <a class="btn btn-warning" style="color:rgb(248, 248, 248);" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/vulnparam" routerLinkActive="active" href="#" role="button">View</a></p>
+                      </blockquote>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col mx-auto">
+            <div class="p-3 border bg-light">
+                <br>
+                <h6 class="fw-bold" style="color:rgb(255, 43, 43); text-align: center;">Insert a vulnerability&nbsp;<img src="/assets/img/vulnerability.png" width="30" height="30" class="d-inline-block align-text-top"></h6>
+                <br>
+                <form (ngSubmit)="createVulnerability()" [formGroup]="addVulnerabilityForm" class="row g-3 text-left">
+                    <div class="col-md-6">
+                      <label for="Name" class="form-label">Name</label>
+                      <input type="text" class="form-control" placeholder="Write the name of the vulnerability" id="vulName" formControlName="vulName">
+                      <p *ngIf="!addVulnerabilityForm.get('vulName')!.valid && addVulnerabilityForm.get('vulName')!.touched">* Insert a name for the vulnerability</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Screenshot" class="form-label">Screenshot</label>
+                        <input class="form-control" type="file" id="screenshot" formControlName="screenshot">
+                    </div>
+                    <div class="col-6">
+                        <label for="Notes" class="form-label">Notes</label>
+                        <textarea class="form-control" placeholder="Write notes" id="note" formControlName="note" style="height: 100px"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Consequence" class="form-label">Consequence</label>
+                        <textarea class="form-control" placeholder="Write consequence" id="consequence" formControlName="consequence" style="height: 100px"></textarea>
+                        <p *ngIf="!addVulnerabilityForm.get('consequence')!.valid && addVulnerabilityForm.get('consequence')!.touched">* Insert a consequence for the vulnerability</p>
+                      </div>
+                    <div class="col-md-6">
+                        <label for="RequestPayload" class="form-label">Request Payload</label>
+                        <textarea class="form-control" placeholder="Write request payload" id="requestPayload" formControlName="requestPayload" style="height: 70px"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="ResponseServer" class="form-label">Response Server</label>
+                        <textarea class="form-control" placeholder="Write response server" id="responseServer" formControlName="responseServer" style="height: 70px"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="VulState" class="form-label">Vulnerability State</label>
+                      <select id="vulState" formControlName="vulState" class="form-select">
+                        <option value="1">Open</option>
+                        <option value="0">Close</option>
+                      </select>
+                      <p *ngIf="!addVulnerabilityForm.get('vulState')!.valid && addVulnerabilityForm.get('vulState')!.touched">* Insert a state for the vulnerability</p>
+                    </div>
+                    <div class="col-12">
+                    <label for="linkedParameterID" class="form-label">ID referenced Parameter</label>
+                    <select ng-model="selectedLinkedParameterID" id="linkedParameterID" formControlName="linkedParameterID" class="form-select">
+                      <option *ngFor="let p of Parameter" [value]="p.id">{{p.id}},&nbsp;{{p.parameterName}}</option>
+                    </select>
+                    {{selectedLinkedParameterID}}
+                    </div>
+                    <div class="col-12" style="text-align:center;">
+                        <button type="submit" class="btn btn-danger text-center" [disabled]="!this.addVulnerabilityForm.valid">Add</button>
+                    </div>
+                  </form>
+                  <br>
+                  <br>
+                <div class="card text-center">
+                    <div class="card-header" style="color:rgb(255, 43, 43); text-align: center;">List vulnerabilities of the endpoint
+                        <img src="/assets/img/list.png" width="24" height="24" class="d-inline-block align-text-top">
+                    </div>
+                    <div class="card-body text-center">
+                    <blockquote class="blockquote mb-0">
+                        <a class="btn btn-danger" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/vulnerabilities" routerLinkActive="active" role="button">Vulnerabilities</a>
+                    </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>

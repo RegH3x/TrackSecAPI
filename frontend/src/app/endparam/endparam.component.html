@@ -1,0 +1,57 @@
+<br>
+<div style="text-align:center;">
+<a class="btn btn-warning text-center" routerLink="/projects/{{id}}" routerLinkActive="active" role="button">Back to the Project</a>
+</div>
+<br>
+<div class="container position-absolute top-20 start-5 text-center">
+    <div class="row">
+        <div class="col">
+            <div class="p-3 border bg-light mx-auto" style="width: 900px; height: auto;">
+                <p class="fs-5 fw-bold text-center"> Endpoints - Parameters
+                    <img src="/assets/img/endpoint.png" alt="Logo" width="40" height="40">
+                    <img src="/assets/img/freccia.jpg" alt="Logo" width="30" height="18">
+                    <img src="/assets/img/parameter.png" alt="Logo" width="40" height="40">
+                </p>
+                <table *ngFor="let e of Endparam" class="table table-secondary table-striped mx-auto" style="width:800px; border: 0.7px solid #000000; word-break:break-all;">
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Endpoint Name</th>
+                        <th scope="col">Parameter Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{e.id}}</th>
+                            <td><button type="button" class="btn btn-link" alt="visualizza endpoint" routerLink="/projects/{{id}}/endpoints/{{e.endpointId}}" routerLinkActive="active">{{e.endpointName}}</button></td>
+                            <td><button type="button" class="btn btn-link" alt="visualizza parametro" routerLink="/projects/{{id}}/endpoints/{{e.endpointId}}/parameters/{{e.parameterId}}" routerLinkActive="active">{{e.parameterName}}</button></td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br>
+    <br>
+    <br>
+    <br>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>

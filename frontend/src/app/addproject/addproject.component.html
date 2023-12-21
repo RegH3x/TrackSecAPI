@@ -1,0 +1,18 @@
+<br>
+<div class="container mx-auto">
+  <div class="row row-cols-1 row-cols-lg-3 g-2 g-lg-3">
+    <div class="col mx-auto">
+        <h6 class="fw-bold" style="color:rgb(52, 75, 202); text-align: center;">Insert new Project&nbsp;<img src="/assets/img/project.jpeg" width="30" height="30" class="d-inline-block align-text-top"></h6>
+        <form (ngSubmit)="createProject()" [formGroup]="addProjectForm">
+            <div class="mb-3">
+              <label for="ProjectName" class="form-label">Project Name</label>
+              <input type="text" class="form-control" id="ProjectName" formControlName="projectName">
+              <p *ngIf="!addProjectForm.get('projectName')!.valid && addProjectForm.get('projectName')!.touched">* Insert Project Name</p>
+            </div>
+            <div style="text-align:center;">
+              <button type="submit" class="btn btn-primary" [disabled]="!this.addProjectForm.valid">Add Project</button>
+            </div>
+        </form>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+import { Component, OnInit} from '@angular/core';
+import { HttpClient} from '@angular/common/http';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-addproject',
+  templateUrl: './addproject.component.html',
+  styleUrls: ['./addproject.component.css']
+})
+
+export class AddprojectComponent implements OnInit {
+  selectField: FormControl = new FormControl();
+  form: FormGroup;
+  loading: boolean = false;
+
+  constructor(public http: HttpClient, public fb: FormBuilder) {
+    this.form = fb.group({
+      "projectName": ['', Validators.required]
+    });
+  }
+
+  ngOnInit(): void {
+  }
+
+  createProject() {
+    if(!this.form.valid){
+      alert("compilare il campo nome del progetto")
+      return;
+    }
+    this.loading = true;
+    this.http.post('http://localhost:3000/projects/', {
+      request: "createProject",
+      projectName: this.form.controls['projectName'].value
+    }, {responseType: 'text'}).subscribe(res => {
+      alert(res);
+      console.log(res);
+      this.loading = false;
+    })
+  }
+}

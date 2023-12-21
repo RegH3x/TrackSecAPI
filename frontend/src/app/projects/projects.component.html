@@ -1,0 +1,121 @@
+<br>
+
+<div class="container mx-auto">
+  <div class="row row-cols-1 row-cols-lg-1 g-2 g-lg-3">
+      <div class="col mx-auto">
+        <br>
+        <p class="fs-5 fw-bold text-center" style="color:rgb(53, 96, 177); text-align: left;" >General Search Form
+          <img src="/assets/img/search.png" alt="Logo" width="40" height="40">
+          </p>
+        <form (ngSubmit)="completeSearch()" [formGroup]="completeSearchForm" role="search" class="row align-items-center justify-content-center">
+            <div class="col-md-auto">
+            <label for="searchType" class="form-label">Value to search</label>
+            <input class="form-control me-2" id="valueSearch" formControlName="valueSearch" type="search" placeholder="Insert name of value" aria-label="Search">
+            <p *ngIf="!completeSearchForm.get('valueSearch')!.valid && completeSearchForm.get('valueSearch')!.touched">* Insert name of value</p>
+            </div>
+            <div class="col-md-auto">
+              <label for="searchType" class="form-label">Type of search</label>
+              <select id="searchType" formControlName="searchType" class="form-select">
+                <option value="Endpoints">Endpoints</option>
+                <option value="Parameters">Parameters</option>
+                <option value="Vulnerabilities">Vulnerabilities</option>
+              </select>
+              <p *ngIf="!completeSearchForm.get('searchType')!.valid && completeSearchForm.get('searchType')!.touched">* Select a search type</p>
+            </div>
+            <div class="col-md-auto">
+              <label for="Li" class="form-label">Projects to research</label>
+              <select multiple class="form-select" ng-model="selectedProjects" id="listOfProject" formControlName="listOfProject">
+                <option *ngFor="let p of allProjects" [value]="p.id">{{p.projectName}}</option>
+              </select>
+              {{selectedProjects}}
+              <p *ngIf="!completeSearchForm.get('listOfProject')!.valid && completeSearchForm.get('listOfProject')!.touched">* Select a project</p>
+            </div>
+            <div class="col-md-auto">
+              <button class="btn btn-primary text-center" [disabled]="!this.completeSearchForm.valid" type="submit">Search</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="col text-center mx-auto">
+    <div class="p-3 border bg-light" >
+      <p class="fs-5 fw-bold text-center"> Results of research</p>
+      <table *ngFor="let e of Endpoints" class="table table-success table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;">
+          <thead>
+            <tr>
+              <th scope="col">Endpoint Name</th>
+              <th scope="col">Project Name</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <th scope="row"><button type="button" class="btn btn-link" alt="view endpoint" routerLink="/projects/{{e.projectId}}/endpoints/{{e.id}}" routerLinkActive="active">{{e.Endpoint}}</button></th>
+              <td>{{e.projectName}}</td>
+            </tr>
+          </tbody>
+      </table>
+      <table *ngFor="let p of Parameters" class="table table-success table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;">
+          <thead>
+            <tr>
+              <th scope="col">Parameter Name</th>
+              <th scope="col">Project Name</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <th scope="row"><button type="button" class="btn btn-link" alt="view parameter" routerLink="/projects/{{p.projectId}}/endpoints/{{p.endpointId}}/parameters/{{p.id}}" routerLinkActive="active">{{p.parameterName}}</button></th>
+              <td>{{p.projectName}}</td>
+            </tr>
+          </tbody>
+      </table>
+      <table *ngFor="let v of Vulnerabilities" class="table table-success table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;">
+          <thead>
+            <tr>
+              <th scope="col">Vulnerability Name</th>
+              <th scope="col">Project Name</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <th scope="row"><button type="button" class="btn btn-link" alt="view vulnerability" routerLink="/projects/{{v.projectId}}/endpoints/{{v.endpointId}}/vulnerabilities/{{v.id}}" routerLinkActive="active">{{v.vulName}}</button></th>
+              <td>{{v.projectName}}</td>
+              </tr>
+          </tbody>
+      </table>
+      <br>
+    </div>
+  </div>
+
+
+  <div class="col mx-auto">
+    <div class="p-3 border bg-light">
+      <p class="fs-5 fw-bold text-center">List of all Projects
+        <img src="/assets/img/project.jpeg" alt="Logo" width="40" height="40">
+      </p>
+      <div class="container-md text-center mx-auto">
+        <div class="row row-cols-1 row-cols-lg-2">
+            <table *ngFor="let p of allProjects" class="table table-responsive flex-wrap">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Creation Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <th scope="row">
+                        <button type="button" class="btn btn-primary" title="View Project" routerLink="/projects/{{p.id}}" routerLinkActive="active">View/Modify</button>
+                      </th>
+                      <td>{{p.projectName}}</td>
+                      <td>{{p.creationDate}}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
