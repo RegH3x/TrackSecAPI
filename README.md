@@ -1,4 +1,4 @@
-![logo](https://github.com/RegH3x/TrackSecAPI/assets/38158309/0a55762b-4cec-4ef3-ab03-abca8ef80511)
+![logo](https://github.com/RegH3x/TrackSecAPI/assets/38158309/5c16d0ea-992f-41bf-a36c-e60951e5d3d3)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
