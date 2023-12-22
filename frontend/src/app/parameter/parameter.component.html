@@ -1,0 +1,38 @@
+<br>
+<div style="text-align:center;">
+  <a class="btn btn-warning text-center" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}" routerLinkActive="active" role="button">Back to the Endpoint</a>
+  &nbsp;&nbsp;
+  <a class="btn btn-success text-center" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/parameters" routerLinkActive="active" role="button">Back to the Parameters list</a>
+</div>
+<br>
+<div class="container mx-auto">
+  <div class="row row-cols-1 row-cols-lg-3 g-2 g-lg-3">
+      <div class="col mx-auto">
+
+        <div *ngFor="let p of Parameter" class="p-3 border bg-light">
+        <p class="fs-5 fw-bold text-center"> Parameter Card
+            <img src="/assets/img/parameter.png" alt="Logo" width="40" height="40">
+        </p>
+        <div class="card">
+            <div class="card-header text-center">Id:&nbsp;{{p.id}}</div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                <p><label for="Nome" class="fs-6 fw-bold" style="color:rgb(23, 81, 207);">Name:&nbsp;</label>{{p.parameterName}}</p>
+                <p>
+                <label for="Note" class="fs-6 fw-bold" style="color:rgb(23, 81, 207);">Note:&nbsp;</label>
+                <textarea class="form-control" rows="2" id="note">{{p.note}}</textarea>
+                </p>
+                <footer class="blockquote-footer" style="color:rgb(23, 81, 207);">Creation Date:&nbsp;<cite style="color:rgb(0, 0, 0);" title="creationDate">{{p.creationDate}}</cite></footer>
+                <p><label for="EndpointId" style="color:rgb(23, 81, 207);" class="fs-6 fw-bold">Endpoint ID:&nbsp;</label>{{p.endpointId}}</p>
+
+                <div style="text-align:center;">
+                  <button type="button" class="btn btn-danger" (click)="deleteParameterEndpointById()" title="Delete Parameter"><img src="/assets/img/delete.png" width="24" height="24"></button>
+                  &nbsp;&nbsp;
+                  <button type="button" class="btn btn-warning" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/parameters/{{idparameter}}/editparameter" routerLinkActive="active" title="Update Parameter"><img src="/assets/img/edit.png" width="24" height="24"></button>
+                </div>
+            </blockquote>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>

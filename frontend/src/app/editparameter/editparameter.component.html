@@ -1,0 +1,21 @@
+
+<p class="fw-bold" style="color:rgb(52, 75, 202); text-align: center;">Update Parameter&nbsp;<img src="/assets/img/edit.png" alt="edit icon" width="20" height="20"></p>
+<form (ngSubmit)="editParameter()" [formGroup]="updateParameterForm">
+  <div class="mb-3">
+    <label for="parameterName" class="form-label">Name</label>
+    <input type="text" class="form-control" id="parameterName" formControlName="parameterName" style="text-align:left;">
+    <p *ngIf="!updateParameterForm.get('parameterName')!.valid && updateParameterForm.get('parameterName')!.touched">* Insert a name for the parameter</p>
+  </div>
+  <div class="mb-3">
+    <label for="Note" class="form-label">Note</label>
+    <input type="text" class="form-control" id="Note" formControlName="note">
+    <p *ngIf="!updateParameterForm.get('note')!.valid && updateParameterForm.get('note')!.touched">* Insert a note</p>
+  </div>
+  <div style="text-align:center;">
+    <button type="submit" class="btn btn-primary text-center">Update Parameter</button>
+  </div>
+</form>
+<br>
+<div style="text-align:center;">
+    <button class="btn btn-outline-success text-center" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/parameters/{{idparameter}}" routerLinkActive="active" role="button">Go back to Parameter</button>
+</div>

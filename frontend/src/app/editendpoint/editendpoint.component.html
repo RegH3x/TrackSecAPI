@@ -1,0 +1,36 @@
+<p class="fw-bold" style="color:rgb(52, 75, 202); text-align: center;">Update Endpoint&nbsp;<img src="/assets/img/edit.png" alt="edit icon" width="20" height="20"></p>
+<form (ngSubmit)="editEndpoint()" [formGroup]="updateEndpointForm">
+  <div class="mb-3">
+    <label for="pathUI" class="form-label">Path UI</label>
+    <input type="text" class="form-control" id="pathUI" formControlName="pathUI" style="text-align:left;">
+    <p *ngIf="!updateEndpointForm.get('pathUI')!.valid && updateEndpointForm.get('pathUI')!.touched">* Insert a Path UI</p>
+  </div>
+  <div class="mb-3">
+    <label for="domain" class="form-label">Domain</label>
+    <input type="text" class="form-control" id="domain" formControlName="domain">
+    <p *ngIf="!updateEndpointForm.get('domain')!.valid && updateEndpointForm.get('domain')!.touched">* Insert a Domain</p>
+  </div>
+  <div class="mb-3">
+    <label for="endpoint" class="form-label">Endpoint</label>
+    <input type="text" class="form-control" id="endpoint" formControlName="endpoint">
+    <p *ngIf="!updateEndpointForm.get('endpoint')!.valid && updateEndpointForm.get('endpoint')!.touched">* Insert an Endpoint</p>
+  </div>
+  <div class="mb-3">
+    <label for="apiDescription" class="form-label">Description</label>
+    <textarea class="form-control" id="apiDescription" formControlName="apiDescription" style="height: 100px"></textarea>
+  </div>
+  <p fs-6 text-left>
+    <label for="linkedEndpointID" class="form-label">ID referenced Endpoint</label>
+    <select ng-model="selectedLinkedEndpointID" id="linkedEndpointID" formControlName="linkedEndpointID" class="form-select">
+      <option *ngFor="let e of Endpoints" [value]="e.id">{{e.id}},&nbsp;{{e.endpoint}}</option>
+    </select>
+    {{selectedLinkedEndpointID}}
+  </p>
+  <div style="text-align:center;">
+    <button type="submit" class="btn btn-primary text-center">Update Endpoint</button>
+  </div>
+</form>
+<br>
+<div style="text-align:center;">
+    <button class="btn btn-outline-success text-center" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}" routerLinkActive="active" role="button">Go back to Endpoint</button>
+</div>

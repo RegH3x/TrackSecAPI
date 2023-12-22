@@ -1,0 +1,113 @@
+<br>
+<div style="text-align:center;">
+<a class="btn btn-warning text-center" routerLink="/projects/{{id}}" routerLinkActive="active" role="button">Back to the Project</a>
+</div>
+<br>
+<div class="container mx-auto">
+    <div class="row row-cols-1 row-cols-lg-4 g-2 g-lg-3">
+        <div class="col-6 mx-auto">
+            <div class="p-3 border bg-light" style="width:400px; height:auto;">
+                <div class="p-3 border card">
+                <h6 class="fw-bold" style="color:rgb(53, 177, 53); text-align: left;" >Search parameter <br>by name</h6>
+                <form (ngSubmit)="searchParam()" [formGroup]="searchParamForm" class="d-flex" role="search">
+                    <input class="form-control me-2" id="parameterName" formControlName="parameterName" type="search" placeholder="Insert parameter name" aria-label="Search">
+                    <p *ngIf="!searchParamForm.get('parameterName')!.valid && searchParamForm.get('parameterName')!.touched">* Insert a Parameter Name</p>
+                    <button class="btn btn-outline-success text-center" type="submit">Search</button>
+                </form>
+                </div>
+                <br>
+                <div class="p-3 border bg-light mx-auto" style="width: 360px; height: auto;">
+                    <p class="fs-5 fw-bold text-center"> Results of parameter research
+                        <img src="/assets/img/search.png" alt="Logo" width="40" height="40">
+                        <img src="/assets/img/parameter.png" alt="Logo" width="40" height="40">
+                    </p>
+                    <table *ngFor="let p of params" class="table table-success table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;"> 
+                        <thead>
+                          <tr>
+                            <th scope="col">Parameter Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><button type="button" class="btn btn-link" alt="view parameter" routerLink="/projects/{{id}}/endpoints/{{p.endpointId}}/parameters/{{p.id}}" routerLinkActive="active">{{p.parameterName}}</button></th>
+                            </tr>
+                        </tbody>
+                      </table>
+                      <br>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-6 text-center mx-auto">
+            <div class="p-3 border bg-light" style="width:400px; height:auto;">
+                <div class="p-3 border card">
+                <h6 class="fw-bold" style="color:rgb(255, 195, 30); text-align: left;" >Search vulnerability <br>in the project</h6>
+                <form (ngSubmit)="searchVuln()" [formGroup]="searchVulnForm" class="d-flex" role="search">
+                    <input class="form-control me-2" id="vulName" formControlName="vulName" type="search" placeholder="Insert vulnerability name" aria-label="Search">
+                    <p *ngIf="!searchVulnForm.get('vulName')!.valid && searchVulnForm.get('vulName')!.touched">* Insert a Vulnerability Name</p>
+                    <button class="btn btn-outline-warning text-center" type="submit">Search</button>
+                </form>
+                </div>
+                <br>
+                <div class="p-3 border bg-light mx-auto" style="width: 370px; height: auto;">
+                    <p class="fs-5 fw-bold text-center"> Results of vulnerability research
+                        <img src="/assets/img/search.png" alt="Logo" width="40" height="40">
+                        <img src="/assets/img/vulnerability.png" alt="Logo" width="40" height="40">
+                    </p>
+                    <table *ngFor="let v of vulns" class="table table-warning table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;"> 
+                        <thead>
+                          <tr>
+                            <th scope="col">Vulnerability Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><button type="button" class="btn btn-link" alt="view vulnerability" routerLink="/projects/{{id}}/endpoints/{{v.endpointId}}/vulnerabilities/{{v.id}}" routerLinkActive="active">{{v.vulName}}</button></th>
+                            </tr>
+                        </tbody>
+                      </table>
+                      <br>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 mx-auto">
+            <div class="p-3 border bg-light" style="width:400px; height:auto;">
+                <div class="p-3 border card">
+                <h6 class="fw-bold" style="color:rgba(211, 14, 14, 0.644); text-align: left;" >Search vulnerabilities <br> relative to the parameter</h6>
+                <form (ngSubmit)="searchVulnParam()" [formGroup]="searchVulnParamForm" class="d-flex" role="search">
+                    <input class="form-control me-2" id="parameterName" formControlName="parameterName" type="search" placeholder="Insert paramater name" aria-label="Search">
+                    <p *ngIf="!searchVulnParamForm.get('parameterName')!.valid && searchVulnParamForm.get('parameterName')!.touched">* Insert a Parameter Name</p>
+                    <button class="btn btn-outline-danger text-center" type="submit">Search</button>
+                </form>
+                </div>
+                <br>
+                <div class="p-3 border bg-light mx-auto" style="width: 370px; height: auto;">
+                    <p class="fs-5 fw-bold text-center"> Results of the vulnerabilities relative to the paramater
+                        <img src="/assets/img/search.png" alt="Logo" width="40" height="40">
+                        <img src="/assets/img/vulnerability.png" alt="Logo" width="40" height="40">
+                        <img src="/assets/img/parameter.png" alt="Logo" width="40" height="40">
+    
+                    </p>
+                    <table *ngFor="let vp of vulnparams" class="table table-danger table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;"> 
+                        <thead>
+                          <tr>
+                            <th scope="col">Vulnerabilities results</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row"><button type="button" class="btn btn-link" alt="view vulnerability" routerLink="/projects/{{id}}/endpoints/{{vp.endpointId}}/vulnerabilities/{{vp.id}}" routerLinkActive="active">{{vp.vulName}}</button></td>
+                            </tr>
+                        </tbody>
+                      </table>
+                      <br>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+

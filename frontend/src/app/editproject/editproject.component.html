@@ -1,0 +1,25 @@
+
+<p class="fs-5 fw-bold text-center">Update project
+  <img src="/assets/img/edit.png" alt="Logo" width="50" height="50">
+</p>
+<div class="container-md text-center mx-auto">
+<div class="row row-cols-1 row-cols-lg-2">
+  <div class="col mx-auto">
+
+    <form (ngSubmit)="editProject()" [formGroup]="updateProjectForm">
+        <div class="mb-3">
+          <label for="exampleInputNome" class="form-label">Project Name</label>
+          <input type="text" class="form-control" id="ProjectName" formControlName="projectName">
+          <p *ngIf="!updateProjectForm.get('projectName')!.valid && updateProjectForm.get('projectName')!.touched">* Insert a name for the project</p>
+        </div>
+        <div style="text-align:center;">
+        <button type="submit" class="btn btn-primary">Modifica progetto</button>
+        </div>
+    </form>
+    <br>
+    <div style="text-align:center;">
+        <button class="btn btn-outline-danger text-center" routerLink="/projects/{{id}}" routerLinkActive="active" type="button" >Go back to Project</button>
+    </div>
+  </div>
+</div>
+</div>
