@@ -38,7 +38,7 @@ router.post('/searchInAllProjects', function(req, res) {
 	connection.connect();
 	if (req.body.searchType == "Endpoints"){
 		var endpointList = [];
-		connection.query(`SELECT Endpoints.id, Endpoints.Endpoint, Endpoints.projectId FROM Endpoints JOIN Projects ON Endpoints.projectId = Projects.id WHERE (Endpoint LIKE '%${req.body.valueSearch}%') AND (projectId IN (${req.body.listOfProject}))`, function(err, rows, fields) {
+		connection.query(`SELECT Endpoints.id, Endpoints.Endpoint, Endpoints.projectId, Projects.projectName FROM Endpoints JOIN Projects ON Endpoints.projectId = Projects.id WHERE (Endpoint LIKE '%${req.body.valueSearch}%') AND (projectId IN (${req.body.listOfProject}))`, function(err, rows, fields) {
 			if (err) {
 				res.status(500).json({"status_code": 500,"status_message": "internal server error"});
 			} else {
