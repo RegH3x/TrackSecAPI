@@ -1,5 +1,6 @@
 
 myExpressApp/configdb.js
+myExpressApp/node_modules/
 DBcreation.py
 
 ## Angular
