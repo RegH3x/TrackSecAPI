@@ -2,6 +2,7 @@
 
 myExpressApp/configdb.js
 myExpressApp/node_modules/
+myExpressApp/package-lock.json
 DBcreation.py
 
 ## Angular
