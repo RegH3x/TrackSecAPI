@@ -45,11 +45,15 @@ npm install -g @angular/cli
 ## LINUX
 
 ```bash
+curl -sL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh
+chmod + /tmp/nodesource_setup.sh
+sudo /tmp/nodesource_setup.sh
 sudo apt update
 sudo apt install nodejs
 sudo apt install npm
 sudo apt install mysql-server
 sudo apt install python3
+sudo mysql_secure_installation
 ```
 
 ## MACOS
@@ -76,6 +80,14 @@ cp DBcreation_template.py DBcreation.py
 ```
 
 Create a user in mysql and put username and password in [DBcreation.py](DBcreation.py) file.
+```bash
+mysql -u root -p
+
+CREATE USER 'example_user'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY 'your_password';
+CREATE DATABASE IF NOT EXISTS TrackSecAPI;
+GRANT ALL PRIVILEGES ON TrackSecAPI.* TO 'example_user'@'localhost';
+FLUSH PRIVILEGES;
+```
 
 Run the DB creation script
 ```bash
@@ -84,36 +96,35 @@ python3 DBcreation.py
 ```
 
 Set DB credentials in the express backend 
-
-```
+```bash
 cd myExpressApp
 cp configdb_template.js configdb.js
 nano configdb.js
 ```
 
+
 ### Backend: Express NodeJS Configuration
 
-```
+```bash
 cd myExpressApp/
 npm install
 ```
 
 ### Frontend: Angular and Bootstrap Configuration
 
-```
+```bash
 sudo npm install -g @angular/cli
-cd frontend
+cd ../frontend
 npm install bootstrap bootstrap-icons @popperjs/core @ng-bootstrap/ng-bootstrap
 ng add @ng-bootstrap/ng-bootstrap
 ```
 
 Modify angular.json in order to get bootstrap5 working
-
-```
+```bash
 nano frontend/angular.json
 ```
 Add those lines
-```
+```bash
     "scripts": [
                 "/node_modules/@popperjs/core/dist/umd/popper.min.js",
                 "/node_modules/bootstrap/dist/js/bootstrap.min.js"
@@ -123,14 +134,14 @@ Add those lines
 # Usage
 
 ### Connect to the backend express server
-```
+```bash
 cd myExpressApp/
 npm start
 ```
 The backend will now be listening on http://localhost:3000
 
 ### Start angular + bootstrap frontend
-```
+```bash
 cd frontend
 ng serve
 ```
