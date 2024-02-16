@@ -12,11 +12,12 @@ frontend/bazel-out
 frontend/integration/bazel/bazel-*
 frontend/.log
 frontend/node_modules/
+frontend/package-lock.json
 
 # CircleCI temporary file for cache key computation.
 # See `save_month_to_file` in `.circleci/config.yml`.
 frontend/month.txt
-frontend/src/assets
+frontend/src/assets/screenshot
 # Include when developing application packages.
 frontend/pubspec.lock
 frontend/.c9
