@@ -1,4 +1,5 @@
 
+
 myExpressApp/configdb.js
 myExpressApp/node_modules/
 DBcreation.py
@@ -7,12 +8,12 @@ DBcreation.py
 .DS_STORE
 
 frontend/.angular
+frontend/.vscode/
 frontend/dist/
 frontend/bazel-out
 frontend/integration/bazel/bazel-*
 frontend/.log
 frontend/node_modules/
-frontend/package-lock.json
 
 # CircleCI temporary file for cache key computation.
 # See `save_month_to_file` in `.circleci/config.yml`.
