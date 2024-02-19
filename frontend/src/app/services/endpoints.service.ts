@@ -15,6 +15,7 @@ export class EndpointsService {
   apiUpdateEndpoint = '/addendpoint';
   apiGetEndpointCorrelation = '/showendpointcorr';
   apiUpdateTestCheck= '/updateTestCheck';
+  apiRefreshTestCheck = '/refreshTestCheck';
 
   constructor(private http: HttpClient) {}
 
@@ -74,6 +75,14 @@ export class EndpointsService {
   updateTestCheck(id: string, idendpoint: string){
     return this.http.put(this.url + id + '/' + idendpoint + this.apiUpdateTestCheck, {
       request: "updateTestCheck"
+    },{
+      responseType: 'text'
+    });
+  }
+
+  refreshTestCheck(id: string){
+    return this.http.put(this.url + id + this.apiRefreshTestCheck, {
+      request: "refreshTestCheck"
     },{
       responseType: 'text'
     });

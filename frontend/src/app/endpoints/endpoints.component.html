@@ -1,6 +1,9 @@
 <br>
 <div style="text-align:center;">
+  <form (ngSubmit)="refreshTestCheck()">
   <a class="btn btn-warning text-center" routerLink="/projects/{{id}}" routerLinkActive="active" role="button">Back to the Project</a>
+  &nbsp;&nbsp;
+  <button type="submit" class="btn btn-primary text-center">Refresh Test Check</button></form>
 </div>
 <br>
 <div class="container mx-auto">
@@ -83,6 +86,7 @@
 <hr>
 <p class="fs-5 fw-bold text-center">List of all Endpoints
     <img src="/assets/img/endpoint.png" alt="Logo" width="40" height="40">
+
 </p>
 <div class="container-md text-center mx-auto">
   <div class="row row-cols-2 row-cols-lg-2">

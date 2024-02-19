@@ -316,6 +316,20 @@ router.put('/:id/:idendpoint/updateTestCheck', function (req, res) {
 	connection.end();
 });
 
+
+router.put('/:id/refreshTestCheck', function (req, res) {
+	var connection = config.getMySQLConnection();
+	connection.connect();
+	connection.query(`UPDATE Endpoints SET testCheck=False WHERE projectId=${req.params.id}`, function(err, rows) {
+		if (err) {
+			res.status(500).json({"status_code": 500,"status_message": err.message});
+		} else {
+			res.send(`Check test state refresh successfully`);
+		}
+  	});
+	connection.end();
+});
+
 router.post('/:id/allendpoints/searchEndpoint', function(req, res) {
 	var connection = config.getMySQLConnection();
 	connection.connect();

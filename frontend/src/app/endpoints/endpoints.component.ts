@@ -78,4 +78,11 @@ export class EndpointsComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  refreshTestCheck(): void {
+    this.endpoints.refreshTestCheck(this.id!).subscribe(res => {
+      alert(res);
+      console.log(res);
+    });
+  }
 }
