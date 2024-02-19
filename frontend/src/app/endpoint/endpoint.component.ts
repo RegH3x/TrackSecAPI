@@ -64,6 +64,11 @@ export class EndpointComponent implements OnInit {
       console.log(this.Parameter);
     });
 
+    this.vulnerabilities.getVulnerabilitiesEndpointProject(this.id!, this.idendpoint!).subscribe(res => {
+      this.Vulnerability = res;
+      console.log(this.Vulnerability);
+    });
+
   }
 
   deleteEndpointById(): void {
