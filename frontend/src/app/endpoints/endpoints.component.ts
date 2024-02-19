@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Endpoint } from '../models/endpoint.model';
 import { ActivatedRoute } from '@angular/router';
 import { EndpointsService } from '../services/endpoints.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { SearchEndpoints } from '../models/search-endpoints.model';
 
@@ -17,6 +17,7 @@ export class EndpointsComponent implements OnInit {
   Domain: Endpoint[] = new Array();
   EndpointsByDomain: Endpoint[] = new Array();
   id: string | null;
+  idendpoint: string | null;
   searchEndpointForm: FormGroup;
   EndpointForm: FormGroup;
   loading: boolean = false;
@@ -26,8 +27,10 @@ export class EndpointsComponent implements OnInit {
   apiSearchEndpoint ='/allendpoints/searchEndpoint';
   apiGetAllEndpointsByDomains = '/allendpointsByDomain';
 
+
   constructor(private endpoints: EndpointsService, public http: HttpClient, private route: ActivatedRoute, public fb: FormBuilder) {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.idendpoint = this.route.snapshot.paramMap.get('idendpoint');
     this.searchEndpointForm = fb.group({
       "valueSearch": ['', Validators.required] 
     });
@@ -46,7 +49,6 @@ export class EndpointsComponent implements OnInit {
       this.Domain = res;
       console.log(this.Domain);
     });
-
   }
 
   getEndpointsByDomain(){
@@ -60,7 +62,6 @@ export class EndpointsComponent implements OnInit {
       this.loading = false;
     });
   }
-    
 
   endpointSearch() {
     if(!this.searchEndpointForm.valid){

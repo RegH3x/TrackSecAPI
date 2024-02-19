@@ -6,4 +6,5 @@ export class Endpoint{
     apiDescription: string | undefined;
     creationDate: string | undefined;
     projectId: number | undefined;
+    testCheck: boolean | undefined;
 }

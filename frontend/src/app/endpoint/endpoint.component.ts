@@ -73,6 +73,13 @@ export class EndpointComponent implements OnInit {
     });
   }
 
+  updateTestCheck(): void {
+    this.endpoints.updateTestCheck(this.id!, this.idendpoint!).subscribe(res => {
+      alert(res);
+      console.log(res);
+    });
+  }
+
   createParameter() {
     this.parameters.insertParameter(
       this.id!,

@@ -54,6 +54,7 @@
                   <th scope="col">Path UI</th>
                   <th scope="col">Domain</th>
                   <th scope="col">Name</th>
+                  <th scope="col">Check</th>
                 </tr>
               </thead>
               <tbody>
@@ -64,6 +65,10 @@
                       <td>{{e.pathUI}}</td>
                       <td>{{e.domain}}</td>
                       <td>{{e.endpoint}}</td>
+                      <td><div class="center">
+                      <input class="form-check-input" type="checkbox" id="testCheck" aria-label="..." [checked]="e.testCheck" >
+                      </div>
+                    </td>
                   </tr>
               </tbody>
             </table>
@@ -89,6 +94,7 @@
               <th scope="col">Path UI</th>
               <th scope="col">Domain</th>
               <th scope="col">Name</th>
+              <th scope="col">Check</th>
             </tr>
           </thead>
           <tbody>
@@ -99,6 +105,7 @@
                   <td>{{e.pathUI}}</td>
                   <td>{{e.domain}}</td>
                   <td>{{e.endpoint}}</td>
+                  <td><div class="center"><input class="form-check-input" type="checkbox" id="testCheck" aria-label="..." [checked]="e.testCheck"></div></td>
               </tr>
           </tbody>
         </table>

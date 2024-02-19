@@ -14,6 +14,7 @@ export class EndpointsService {
   apiInsertEndpoint = '/addendpoint';
   apiUpdateEndpoint = '/addendpoint';
   apiGetEndpointCorrelation = '/showendpointcorr';
+  apiUpdateTestCheck= '/updateTestCheck';
 
   constructor(private http: HttpClient) {}
 
@@ -66,6 +67,14 @@ export class EndpointsService {
 
   deleteEndpointByID(id: string, idendpoint: string){
     return this.http.delete(this.url + id + '/' + idendpoint, {
+      responseType: 'text'
+    });
+  }
+
+  updateTestCheck(id: string, idendpoint: string){
+    return this.http.put(this.url + id + '/' + idendpoint + this.apiUpdateTestCheck, {
+      request: "updateTestCheck"
+    },{
       responseType: 'text'
     });
   }

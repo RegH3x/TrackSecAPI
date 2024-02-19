@@ -61,7 +61,6 @@ router.put('/:id', function (req, res) {
 			res.send(`Project updated successfully`);
 	  	}
 	});
-	
 	connection.end();	
 });
 
@@ -247,7 +246,8 @@ router.get('/:id/allendpoints', function(req, res, next) {
 					'endpoint':rows[i].Endpoint,
 					'apiDescription':rows[i].ApiDescription,
 				  	'creationDate':rows[i].creationDate,
-				  	'projectId':rows[i].projectId
+				  	'projectId':rows[i].projectId,
+					'testCheck':rows[i].testCheck
 				}
 				
 				endpointList.push(endpoint);
@@ -283,7 +283,7 @@ router.post('/:id/allendpointsByDomain', function(req, res, next) {
 	var endpointList = [];
 	var connection = config.getMySQLConnection();
 	connection.connect();
-	connection.query(`SELECT id, pathUi, domain, Endpoint FROM Endpoints WHERE projectId=${req.params.id} AND domain="${req.body.selectedDomain}"`, function(err, rows2, fields) {
+	connection.query(`SELECT id, pathUi, domain, Endpoint, testCheck FROM Endpoints WHERE projectId=${req.params.id} AND domain="${req.body.selectedDomain}"`, function(err, rows2, fields) {
 		if (err) {
 			res.status(500).json({"status_code": 500,"status_message": err.message});
 		} else {			
@@ -292,7 +292,8 @@ router.post('/:id/allendpointsByDomain', function(req, res, next) {
 					'id':rows2[i].id,
 					'pathUI':rows2[i].pathUi,
 					'domain':rows2[i].domain,
-					'endpoint':rows2[i].Endpoint
+					'endpoint':rows2[i].Endpoint,
+					'testCheck':rows2[i].testCheck
 				}
 				endpointList.push(endpoint);
 			}
@@ -300,6 +301,19 @@ router.post('/:id/allendpointsByDomain', function(req, res, next) {
 		}
 	});
 	connection.end();	
+});
+
+router.put('/:id/:idendpoint/updateTestCheck', function (req, res) {
+	var connection = config.getMySQLConnection();
+	connection.connect();
+	connection.query(`UPDATE Endpoints SET testCheck=True WHERE id=${req.params.idendpoint}`, function(err, rows) {
+		if (err) {
+			res.status(500).json({"status_code": 500,"status_message": err.message});
+		} else {
+			res.send(`Check test state updated successfully`);
+		}
+  	});
+	connection.end();
 });
 
 router.post('/:id/allendpoints/searchEndpoint', function(req, res) {
@@ -344,7 +358,8 @@ router.get('/:id/:idendpoint', function(req, res, next) {
 					'endpoint':rows[0].Endpoint,
 					'apiDescription':rows[0].ApiDescription,
 					'creationDate':rows[0].creationDate,
-					'projectId':rows[0].projectId
+					'projectId':rows[0].projectId,
+					'testCheck':rows[0].testCheck
 				}
 				endpointList.push(endpoint);
 				res.send(endpointList);
