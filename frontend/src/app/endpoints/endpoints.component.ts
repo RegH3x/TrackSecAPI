@@ -16,16 +16,19 @@ export class EndpointsComponent implements OnInit {
   Endpoint: Endpoint[] = new Array();
   Domain: Endpoint[] = new Array();
   EndpointsByDomain: Endpoint[] = new Array();
+  EndpointsByCheck: Endpoint[] = new Array();
   id: string | null;
   idendpoint: string | null;
   searchEndpointForm: FormGroup;
   EndpointForm: FormGroup;
+  EndpointsByCheckForm: FormGroup;
   loading: boolean = false;
   selectedDomain!: string | null;
   Endpoints: SearchEndpoints[] = new Array();
   url = 'http://localhost:3000/projects/';
   apiSearchEndpoint ='/allendpoints/searchEndpoint';
   apiGetAllEndpointsByDomains = '/allendpointsByDomain';
+  apiGetAllEndpointsByCheck = '/filterByCheck';
 
 
   constructor(private endpoints: EndpointsService, public http: HttpClient, private route: ActivatedRoute, public fb: FormBuilder) {
@@ -36,6 +39,9 @@ export class EndpointsComponent implements OnInit {
     });
     this.EndpointForm = fb.group({
       "selectedDomain": ['', Validators.required] 
+    });
+    this.EndpointsByCheckForm = fb.group({
+      "selectedTestCheck": ['', Validators.required] 
     });
   }
 
@@ -59,6 +65,18 @@ export class EndpointsComponent implements OnInit {
     }).subscribe(res => {
       this.EndpointsByDomain = res;
       console.log(this.EndpointsByDomain);
+      this.loading = false;
+    });
+  }
+
+  filterEndpointsByCheck(){
+    this.loading = true;
+    this.http.post<Endpoint[]>(this.url+this.id +this.apiGetAllEndpointsByCheck, {
+      request: "EndpointsByCheck",
+      selectedTestCheck: this.EndpointsByCheckForm.controls['selectedTestCheck'].value
+    }).subscribe(res => {
+      this.EndpointsByCheck = res;
+      console.log(this.EndpointsByCheck);
       this.loading = false;
     });
   }

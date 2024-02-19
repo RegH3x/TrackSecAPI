@@ -303,6 +303,30 @@ router.post('/:id/allendpointsByDomain', function(req, res, next) {
 	connection.end();	
 });
 
+router.post('/:id/filterByCheck', function(req, res, next) {
+	var endpointList = [];
+	var connection = config.getMySQLConnection();
+	connection.connect();
+	connection.query(`SELECT id, pathUi, domain, Endpoint, testCheck FROM Endpoints WHERE projectId=${req.params.id} AND testCheck="${req.body.selectedTestCheck}"`, function(err, rows2, fields) {
+		if (err) {
+			res.status(500).json({"status_code": 500,"status_message": err.message});
+		} else {			
+			for (var i = 0; i < rows2.length; i++) {			
+				var endpoint = {
+					'id':rows2[i].id,
+					'pathUI':rows2[i].pathUi,
+					'domain':rows2[i].domain,
+					'endpoint':rows2[i].Endpoint,
+					'testCheck':rows2[i].testCheck
+				}
+				endpointList.push(endpoint);
+			}
+		res.send(endpointList);
+		}
+	});
+	connection.end();	
+});
+
 router.put('/:id/:idendpoint/updateTestCheck', function (req, res) {
 	var connection = config.getMySQLConnection();
 	connection.connect();

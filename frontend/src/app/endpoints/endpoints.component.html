@@ -80,6 +80,51 @@
     </div>
   </div>
 
+  <hr>
+
+  <div class="row-cols-1">
+    <form (ngSubmit)="filterEndpointsByCheck()" [formGroup]="EndpointsByCheckForm" role="search" class="row align-items-center justify-content-center">
+      <label for="searchType" class="form-label fs-5 fw-bold" style="color:rgb(136, 13, 13); text-align: left;">Filter by Check State</label>
+      <select ng-model="selectedTestCheck" id="selectedTestCheck" formControlName="selectedTestCheck" class="form-select">
+        <option value="1">Checked</option>
+        <option value="0">Not Checked</option>
+      </select>
+    <button class="btn btn-danger text-center" [disabled]="!this.EndpointsByCheckForm.valid" type="submit">View</button>
+  </form>
+    
+  <div class="container-md text-center mx-auto">
+    <div class="row row-cols-2 row-cols-lg-2">
+      <div class="col mx-auto">
+        <table *ngFor="let e of EndpointsByCheck" class="table table-responsive flex-wrap">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Path UI</th>
+                <th scope="col">Domain</th>
+                <th scope="col">Name</th>
+                <th scope="col">Check</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">
+                      <button type="button" class="btn btn-danger" title="Show Endpoint" routerLink="/projects/{{id}}/endpoints/{{e.id}}" routerLinkActive="active">View/Modify</button>
+                    </th>
+                    <td>{{e.pathUI}}</td>
+                    <td>{{e.domain}}</td>
+                    <td>{{e.endpoint}}</td>
+                    <td><div class="center">
+                    <input class="form-check-input" type="checkbox" id="testCheck" aria-label="..." [checked]="e.testCheck" >
+                    </div>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+
   </div>
 </div>
 <br>
