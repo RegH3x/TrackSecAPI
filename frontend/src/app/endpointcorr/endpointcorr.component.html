@@ -14,14 +14,14 @@
                     <img src="/assets/img/freccia.jpg" alt="Logo" width="30" height="18">
                     <img src="/assets/img/endpoint.png" alt="Logo" width="40" height="40">
                 </p>
-                <table *ngFor="let e of Endcorrs" class="table table-info table-striped mx-auto" style="width:800px; border: 0.7px solid #000000; word-break:break-all;"> 
+                <table class="table table-info table-striped mx-auto" style="width:800px; border: 0.7px solid #000000; word-break:break-all;"> 
                     <thead>
                       <tr>
                         <th scope="col">LinkedEndpoint</th>
                         <th scope="col">NewEndpoint</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody *ngFor="let e of Endcorrs">
                         <tr>
                             <td><button type="button" class="btn btn-link" alt="visualizza endpoint" routerLink="/projects/{{id}}/endpoints/{{e.LinkedEndpointId}}" routerLinkActive="active">{{e.LinkedEndpoint}}</button></td>
                             <td><button type="button" class="btn btn-link" alt="visualizza endpoint" routerLink="/projects/{{id}}/endpoints/{{e.NewEndpointId}}" routerLinkActive="active">{{e.NewEndpoint}}</button></td>

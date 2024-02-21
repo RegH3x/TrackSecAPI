@@ -21,13 +21,13 @@
                         <img src="/assets/img/search.png" alt="Logo" width="40" height="40">
                         <img src="/assets/img/parameter.png" alt="Logo" width="40" height="40">
                     </p>
-                    <table *ngFor="let p of params" class="table table-success table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;"> 
+                    <table class="table table-success table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;"> 
                         <thead>
                           <tr>
                             <th scope="col">Parameter Name</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody *ngFor="let p of params">
                             <tr>
                                 <th scope="row"><button type="button" class="btn btn-link" alt="view parameter" routerLink="/projects/{{id}}/endpoints/{{p.endpointId}}/parameters/{{p.id}}" routerLinkActive="active">{{p.parameterName}}</button></th>
                             </tr>
@@ -55,13 +55,13 @@
                         <img src="/assets/img/search.png" alt="Logo" width="40" height="40">
                         <img src="/assets/img/vulnerability.png" alt="Logo" width="40" height="40">
                     </p>
-                    <table *ngFor="let v of vulns" class="table table-warning table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;"> 
+                    <table class="table table-warning table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;"> 
                         <thead>
                           <tr>
                             <th scope="col">Vulnerability Name</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody *ngFor="let v of vulns">
                             <tr>
                                 <th scope="row"><button type="button" class="btn btn-link" alt="view vulnerability" routerLink="/projects/{{id}}/endpoints/{{v.endpointId}}/vulnerabilities/{{v.id}}" routerLinkActive="active">{{v.vulName}}</button></th>
                             </tr>
@@ -90,13 +90,13 @@
                         <img src="/assets/img/parameter.png" alt="Logo" width="40" height="40">
     
                     </p>
-                    <table *ngFor="let vp of vulnparams" class="table table-danger table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;"> 
+                    <table class="table table-danger table-striped mx-auto" style="width:300px; border: 0.7px solid #000000; word-break:break-all;"> 
                         <thead>
                           <tr>
                             <th scope="col">Vulnerabilities results</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody *ngFor="let vp of vulnparams">
                             <tr>
                                 <td scope="row"><button type="button" class="btn btn-link" alt="view vulnerability" routerLink="/projects/{{id}}/endpoints/{{vp.endpointId}}/vulnerabilities/{{vp.id}}" routerLinkActive="active">{{vp.vulName}}</button></td>
                             </tr>

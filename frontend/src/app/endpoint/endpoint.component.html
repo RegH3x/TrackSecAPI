@@ -86,7 +86,7 @@
                   <div class="container-md text-center mx-auto">
                     <div class="row row-cols-1 row-cols-lg-1">
                       <div class="col mx-auto">
-                        <table *ngFor="let p of Parameter" class="table table-responsive flex-wrap">
+                        <table class="table table-responsive flex-wrap">
                             <thead>
                               <tr>
                                 <th scope="col"></th>
@@ -94,7 +94,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr *ngFor="let p of Parameter">
                                     <th scope="row">
                                       <button type="button" class="btn btn-primary" title="Show Parameter" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/parameters/{{p.id}}" routerLinkActive="active">View/Modify</button>
                                     </th>
@@ -186,7 +186,7 @@
                     <div class="container-md text-center mx-auto">
                       <div class="row row-cols-1 row-cols-lg-1">
                         <div class="col mx-auto">
-                  <table *ngFor="let v of Vulnerability" class="table table-responsive flex-wrap">
+                  <table class="table table-responsive flex-wrap">
                   <thead>
                   <tr>
                   <th scope="col"></th>
@@ -195,7 +195,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
+                  <tr *ngFor="let v of Vulnerability">
                   <th scope="row">
                       <button type="button" class="btn btn-danger" alt="Show Vulnerability" routerLink="/projects/{{id}}/endpoints/{{idendpoint}}/vulnerabilities/{{v.id}}" routerLinkActive="active">View/Modify</button>
                   </th>

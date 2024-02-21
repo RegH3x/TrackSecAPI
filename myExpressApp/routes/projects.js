@@ -236,8 +236,7 @@ router.get('/:id/allendpoints', function(req, res, next) {
 	connection.query(`SELECT * FROM Endpoints WHERE projectId=${req.params.id} ORDER BY domain ASC`, function(err, rows, fields) {
 		if (err) {
 			res.status(500).json({"status_code": 500,"status_message": err.message});
-		} else {
-			
+		} else {			
 			for (var i = 0; i < rows.length; i++) {			
 				var endpoint = {
 					'id':rows[i].id,
@@ -248,9 +247,8 @@ router.get('/:id/allendpoints', function(req, res, next) {
 				  	'creationDate':rows[i].creationDate,
 				  	'projectId':rows[i].projectId,
 					'testCheck':rows[i].testCheck
-				}
-				
-				endpointList.push(endpoint);
+				}				
+				endpointList.push(endpoint);		
 			}
 		res.send(endpointList);
 		

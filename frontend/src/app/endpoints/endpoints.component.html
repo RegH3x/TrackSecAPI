@@ -50,7 +50,7 @@
     <div class="container-md text-center mx-auto">
       <div class="row row-cols-2 row-cols-lg-2">
         <div class="col mx-auto">
-          <table *ngFor="let e of EndpointsByDomain" class="table table-responsive flex-wrap">
+          <table class="table table-responsive flex-wrap">
               <thead>
                 <tr>
                   <th scope="col"></th>
@@ -60,7 +60,7 @@
                   <th scope="col">Check</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngFor="let e of EndpointsByDomain">
                   <tr>
                       <th scope="row">
                         <button type="button" class="btn btn-success" title="Show Endpoint" routerLink="/projects/{{id}}/endpoints/{{e.id}}" routerLinkActive="active">View/Modify</button>
@@ -95,7 +95,7 @@
   <div class="container-md text-center mx-auto">
     <div class="row row-cols-2 row-cols-lg-2">
       <div class="col mx-auto">
-        <table *ngFor="let e of EndpointsByCheck" class="table table-responsive flex-wrap">
+        <table class="table table-responsive flex-wrap">
             <thead>
               <tr>
                 <th scope="col"></th>
@@ -106,7 +106,7 @@
               </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let e of EndpointsByCheck">
                     <th scope="row">
                       <button type="button" class="btn btn-danger" title="Show Endpoint" routerLink="/projects/{{id}}/endpoints/{{e.id}}" routerLinkActive="active">View/Modify</button>
                     </th>
@@ -136,7 +136,7 @@
 <div class="container-md text-center mx-auto">
   <div class="row row-cols-2 row-cols-lg-2">
     <div class="col mx-auto">
-      <table *ngFor="let e of Endpoint" class="table table-responsive flex-wrap">
+      <table class="table table-responsive flex-wrap">
           <thead>
             <tr>
               <th scope="col"></th>
@@ -147,7 +147,7 @@
             </tr>
           </thead>
           <tbody>
-              <tr>
+              <tr *ngFor="let e of Endpoint">
                   <th scope="row">
                     <button type="button" class="btn btn-primary" title="Show Endpoint" routerLink="/projects/{{id}}/endpoints/{{e.id}}" routerLinkActive="active">View/Modify</button>
                   </th>

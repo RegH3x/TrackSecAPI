@@ -12,7 +12,7 @@
                     <img src="/assets/img/freccia.jpg" alt="Logo" width="30" height="18">
                     <img src="/assets/img/parameter.png" alt="Logo" width="40" height="40">
                 </p>
-                <table *ngFor="let e of Endparam" class="table table-secondary table-striped mx-auto" style="width:800px; border: 0.7px solid #000000; word-break:break-all;">
+                <table class="table table-secondary table-striped mx-auto" style="width:800px; border: 0.7px solid #000000; word-break:break-all;">
                     <thead>
                       <tr>
                         <th scope="col"></th>
@@ -20,7 +20,7 @@
                         <th scope="col">Parameter Name</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody *ngFor="let e of Endparam">
                         <tr>
                             <th scope="row">{{e.id}}</th>
                             <td><button type="button" class="btn btn-link" alt="visualizza endpoint" routerLink="/projects/{{id}}/endpoints/{{e.endpointId}}" routerLinkActive="active">{{e.endpointName}}</button></td>

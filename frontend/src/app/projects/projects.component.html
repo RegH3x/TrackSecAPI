@@ -97,7 +97,7 @@
       </p>
       <div class="container-md text-center mx-auto">
         <div class="row row-cols-1 row-cols-lg-2">
-            <table *ngFor="let p of allProjects" class="table table-responsive flex-wrap">
+            <table class="table table-responsive flex-wrap">
               <thead>
                 <tr>
                   <th scope="col"></th>
@@ -106,7 +106,7 @@
                 </tr>
               </thead>
               <tbody>
-                  <tr>
+                  <tr *ngFor="let p of allProjects">
                       <th scope="row">
                         <button type="button" class="btn btn-primary" title="View Project" routerLink="/projects/{{p.id}}" routerLinkActive="active">View/Modify</button>
                       </th>
