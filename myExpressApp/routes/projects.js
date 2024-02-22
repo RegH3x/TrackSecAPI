@@ -233,11 +233,11 @@ router.get('/:id/allendpoints', function(req, res, next) {
 	var endpointList = [];
 	var connection = config.getMySQLConnection();
 	connection.connect();
-	connection.query(`SELECT * FROM Endpoints WHERE projectId=${req.params.id} ORDER BY domain ASC`, function(err, rows, fields) {
+	connection.query(`SELECT Endpoints.id, Endpoints.pathUi, Endpoints.domain, Endpoints.Endpoint, Endpoints.apiDescription, Endpoints.creationDate, Endpoints.projectId, Endpoints.testCheck, COUNT(Parameters.id) AS countParameters FROM Endpoints LEFT JOIN Parameters ON Endpoints.id = Parameters.endpointId WHERE Endpoints.projectId=${req.params.id} GROUP BY Endpoints.id ORDER BY domain ASC`, function(err, rows, fields) {
 		if (err) {
 			res.status(500).json({"status_code": 500,"status_message": err.message});
 		} else {			
-			for (var i = 0; i < rows.length; i++) {			
+			for (var i = 0; i < rows.length; i++) {		
 				var endpoint = {
 					'id':rows[i].id,
 					'pathUI':rows[i].pathUi,
@@ -246,12 +246,12 @@ router.get('/:id/allendpoints', function(req, res, next) {
 					'apiDescription':rows[i].ApiDescription,
 				  	'creationDate':rows[i].creationDate,
 				  	'projectId':rows[i].projectId,
-					'testCheck':rows[i].testCheck
+					'testCheck':rows[i].testCheck,
+					'countParameters':rows[i].countParameters
 				}				
 				endpointList.push(endpoint);		
 			}
 		res.send(endpointList);
-		
 		}
 	});	
 	connection.end();
@@ -281,7 +281,7 @@ router.post('/:id/allendpointsByDomain', function(req, res, next) {
 	var endpointList = [];
 	var connection = config.getMySQLConnection();
 	connection.connect();
-	connection.query(`SELECT id, pathUi, domain, Endpoint, testCheck FROM Endpoints WHERE projectId=${req.params.id} AND domain="${req.body.selectedDomain}"`, function(err, rows2, fields) {
+	connection.query(`SELECT Endpoints.id, Endpoints.pathUi, Endpoints.domain, Endpoints.Endpoint, Endpoints.testCheck, COUNT(Parameters.id) AS countParameters FROM Endpoints LEFT JOIN Parameters ON Endpoints.id = Parameters.endpointId WHERE projectId=${req.params.id} AND domain="${req.body.selectedDomain}" GROUP BY Endpoints.id;`, function(err, rows2, fields) {
 		if (err) {
 			res.status(500).json({"status_code": 500,"status_message": err.message});
 		} else {			
@@ -291,7 +291,8 @@ router.post('/:id/allendpointsByDomain', function(req, res, next) {
 					'pathUI':rows2[i].pathUi,
 					'domain':rows2[i].domain,
 					'endpoint':rows2[i].Endpoint,
-					'testCheck':rows2[i].testCheck
+					'testCheck':rows2[i].testCheck,
+					'countParameters':rows2[i].countParameters
 				}
 				endpointList.push(endpoint);
 			}
@@ -305,7 +306,7 @@ router.post('/:id/filterByCheck', function(req, res, next) {
 	var endpointList = [];
 	var connection = config.getMySQLConnection();
 	connection.connect();
-	connection.query(`SELECT id, pathUi, domain, Endpoint, testCheck FROM Endpoints WHERE projectId=${req.params.id} AND testCheck="${req.body.selectedTestCheck}"`, function(err, rows2, fields) {
+	connection.query(`SELECT Endpoints.id, Endpoints.pathUi, Endpoints.domain, Endpoints.Endpoint, Endpoints.testCheck, COUNT(Parameters.id) AS countParameters FROM Endpoints LEFT JOIN Parameters ON Endpoints.id = Parameters.endpointId WHERE projectId=${req.params.id} AND testCheck="${req.body.selectedTestCheck}" GROUP BY Endpoints.id;`, function(err, rows2, fields) {
 		if (err) {
 			res.status(500).json({"status_code": 500,"status_message": err.message});
 		} else {			
@@ -315,7 +316,8 @@ router.post('/:id/filterByCheck', function(req, res, next) {
 					'pathUI':rows2[i].pathUi,
 					'domain':rows2[i].domain,
 					'endpoint':rows2[i].Endpoint,
-					'testCheck':rows2[i].testCheck
+					'testCheck':rows2[i].testCheck,
+					'countParameters':rows2[i].countParameters
 				}
 				endpointList.push(endpoint);
 			}
