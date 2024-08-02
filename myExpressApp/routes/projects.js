@@ -204,7 +204,7 @@ router.post('/:id/addendpoint', function (req, res, next) {
 	var correlation = '';
 	var connection = config.getMySQLConnection();
 	connection.connect();
-	connection.query(`INSERT INTO Endpoints (pathUi, domain, Endpoint, ApiDescription, projectId, environment) VALUES ('${req.body.pathUI}', '${req.body.domain}', '${req.body.endpoint}', '${req.body.apiDescription}', '${req.body.environment}', '${req.params.id}')`, function(err, rows, fields) {
+	connection.query(`INSERT INTO Endpoints (pathUi, domain, Endpoint, ApiDescription, environment, projectId) VALUES ('${req.body.pathUI}', '${req.body.domain}', '${req.body.endpoint}', '${req.body.apiDescription}', '${req.body.environment}', '${req.params.id}')`, function(err, rows, fields) {
 		if (err) {
 		errinternal = 'err';
 		res.status(500).json({"status_code": 500,"status_message": '1:'+err.message});
