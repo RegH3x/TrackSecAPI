@@ -19,6 +19,14 @@
     <label for="apiDescription" class="form-label">Description</label>
     <textarea class="form-control" id="apiDescription" formControlName="apiDescription" style="height: 100px"></textarea>
   </div>
+  <div class="col-md-6">
+    <label for="environment" class="form-label">Environment</label>
+    <select id="environment" formControlName="environment" class="form-select">
+      <option value="1">TESTING</option>
+      <option value="0">PRODUCTION</option>
+    </select>
+    <p *ngIf="!updateEndpointForm.get('environment')!.valid && updateEndpointForm.get('environment')!.touched">* Insert environment for Endpoint</p>
+  </div>
   <p fs-6 text-left>
     <label for="linkedEndpointID" class="form-label">ID referenced Endpoint</label>
     <select ng-model="selectedLinkedEndpointID" id="linkedEndpointID" formControlName="linkedEndpointID" class="form-select">

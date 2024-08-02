@@ -7,5 +7,6 @@ export class Endpoint{
     creationDate: string | undefined;
     projectId: number | undefined;
     testCheck: boolean | undefined;
+    environment: boolean | undefined;
     countParameters: number | undefined;
 }

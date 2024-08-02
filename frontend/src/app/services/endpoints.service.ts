@@ -35,7 +35,7 @@ export class EndpointsService {
     return this.http.get<Endpoint[]>(this.url + id + '/' + idendpoint);
   }
 
-  insertEndpoint(id: string, pathUI: string, domain: string, endpoint: string, apiDescription: string, linkedEndpointID: string){
+  insertEndpoint(id: string, pathUI: string, domain: string, endpoint: string, apiDescription: string, linkedEndpointID: string, environment: string){
     return this.http.post(this.url + id + this.apiInsertEndpoint, {
       request: "createEndpoint",
       id: id,
@@ -43,13 +43,14 @@ export class EndpointsService {
       domain: domain,
       endpoint: endpoint,
       apiDescription: apiDescription,
-      linkedEndpointID: linkedEndpointID
+      linkedEndpointID: linkedEndpointID,
+      environment: environment
     }, {
       responseType: 'text'
     });
   }
 
-  updateEndpoint(id: string, idendpoint: string, pathUI: string, domain: string, endpoint: string, apiDescription: string, linkedEndpointID: string){
+  updateEndpoint(id: string, idendpoint: string, pathUI: string, domain: string, endpoint: string, apiDescription: string, linkedEndpointID: string, environment: string){
     return this.http.put(this.url + id + '/' + idendpoint, {
       request: "updateEndpoint",
       id: id,
@@ -58,6 +59,7 @@ export class EndpointsService {
       endpoint: endpoint,
       apiDescription: apiDescription,
       linkedEndpointID: linkedEndpointID,
+      environment: environment,
       idendpoint: idendpoint
     }, {
       responseType: 'text'

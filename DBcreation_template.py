@@ -31,6 +31,7 @@ ApiDescription TEXT NULL,
 creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 projectId INTEGER NOT NULL,
 testCheck BOOLEAN DEFAULT 0,
+environment BOOLEAN DEFAULT 0,
 FOREIGN KEY (projectId) REFERENCES Projects(id))""")
 
 mycursor.execute("""CREATE TABLE Parameters (

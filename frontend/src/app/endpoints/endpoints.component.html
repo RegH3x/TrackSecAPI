@@ -58,6 +58,7 @@
                   <th scope="col">Domain</th>
                   <th scope="col">Name</th>
                   <th scope="col">Check</th>
+                  <th scope="col">Environment</th>
                   <th scope="col">n° Parameters</th>
                 </tr>
               </thead>
@@ -73,6 +74,7 @@
                       <input class="form-check-input" type="checkbox" id="testCheck" aria-label="..." [checked]="e.testCheck" >
                       </div>
                       </td>
+                      <td>{{e.environment ? 'TESTING' : 'PRODUCTION'}}</td>
                       <td>{{e.countParameters}}</td>
                   </tr>
               </tbody>
@@ -105,6 +107,7 @@
                 <th scope="col">Domain</th>
                 <th scope="col">Name</th>
                 <th scope="col">Check</th>
+                <th scope="col">Environment</th>
                 <th scope="col">n° Parameters</th>
               </tr>
             </thead>
@@ -120,6 +123,7 @@
                     <input class="form-check-input" type="checkbox" id="testCheck" aria-label="..." [checked]="e.testCheck" >
                     </div>
                     </td>
+                    <td>{{e.environment ? 'TESTING' : 'PRODUCTION'}}</td>
                     <td>{{e.countParameters}}</td>
                 </tr>
             </tbody>
@@ -148,6 +152,7 @@
               <th scope="col">Domain</th>
               <th scope="col">Name</th>
               <th scope="col">Check</th>
+              <th scope="col">Environment</th>
               <th scope="col">n° Parameters</th>
             </tr>
           </thead>
@@ -160,6 +165,7 @@
                   <td>{{e.domain}}</td>
                   <td>{{e.endpoint}}</td>
                   <td><div class="center"><input class="form-check-input" type="checkbox" id="testCheck" aria-label="..." [checked]="e.testCheck"></div></td>
+                  <td>{{e.environment ? 'TESTING' : 'PRODUCTION'}}</td>
                   <td>{{e.countParameters}}</td>
               </tr>
           </tbody>

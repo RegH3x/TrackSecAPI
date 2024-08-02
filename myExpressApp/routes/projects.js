@@ -204,7 +204,7 @@ router.post('/:id/addendpoint', function (req, res, next) {
 	var correlation = '';
 	var connection = config.getMySQLConnection();
 	connection.connect();
-	connection.query(`INSERT INTO Endpoints (pathUi, domain, Endpoint, ApiDescription, projectId) VALUES ('${req.body.pathUI}', '${req.body.domain}', '${req.body.endpoint}', '${req.body.apiDescription}', '${req.params.id}')`, function(err, rows, fields) {
+	connection.query(`INSERT INTO Endpoints (pathUi, domain, Endpoint, ApiDescription, projectId, environment) VALUES ('${req.body.pathUI}', '${req.body.domain}', '${req.body.endpoint}', '${req.body.apiDescription}', '${req.body.environment}', '${req.params.id}')`, function(err, rows, fields) {
 		if (err) {
 		errinternal = 'err';
 		res.status(500).json({"status_code": 500,"status_message": '1:'+err.message});
@@ -233,7 +233,7 @@ router.get('/:id/allendpoints', function(req, res, next) {
 	var endpointList = [];
 	var connection = config.getMySQLConnection();
 	connection.connect();
-	connection.query(`SELECT Endpoints.id, Endpoints.pathUi, Endpoints.domain, Endpoints.Endpoint, Endpoints.apiDescription, Endpoints.creationDate, Endpoints.projectId, Endpoints.testCheck, COUNT(Parameters.id) AS countParameters FROM Endpoints LEFT JOIN Parameters ON Endpoints.id = Parameters.endpointId WHERE Endpoints.projectId=${req.params.id} GROUP BY Endpoints.id ORDER BY domain ASC`, function(err, rows, fields) {
+	connection.query(`SELECT Endpoints.id, Endpoints.pathUi, Endpoints.domain, Endpoints.Endpoint, Endpoints.apiDescription, Endpoints.creationDate, Endpoints.projectId, Endpoints.environment, Endpoints.testCheck, COUNT(Parameters.id) AS countParameters FROM Endpoints LEFT JOIN Parameters ON Endpoints.id = Parameters.endpointId WHERE Endpoints.projectId=${req.params.id} GROUP BY Endpoints.id ORDER BY domain ASC`, function(err, rows, fields) {
 		if (err) {
 			res.status(500).json({"status_code": 500,"status_message": err.message});
 		} else {			
@@ -246,6 +246,7 @@ router.get('/:id/allendpoints', function(req, res, next) {
 					'apiDescription':rows[i].ApiDescription,
 				  	'creationDate':rows[i].creationDate,
 				  	'projectId':rows[i].projectId,
+					'environment':rows[i].environment,
 					'testCheck':rows[i].testCheck,
 					'countParameters':rows[i].countParameters
 				}				
@@ -281,7 +282,7 @@ router.post('/:id/allendpointsByDomain', function(req, res, next) {
 	var endpointList = [];
 	var connection = config.getMySQLConnection();
 	connection.connect();
-	connection.query(`SELECT Endpoints.id, Endpoints.pathUi, Endpoints.domain, Endpoints.Endpoint, Endpoints.testCheck, COUNT(Parameters.id) AS countParameters FROM Endpoints LEFT JOIN Parameters ON Endpoints.id = Parameters.endpointId WHERE projectId=${req.params.id} AND domain="${req.body.selectedDomain}" GROUP BY Endpoints.id;`, function(err, rows2, fields) {
+	connection.query(`SELECT Endpoints.id, Endpoints.pathUi, Endpoints.domain, Endpoints.Endpoint, Endpoints.environment, Endpoints.testCheck, COUNT(Parameters.id) AS countParameters FROM Endpoints LEFT JOIN Parameters ON Endpoints.id = Parameters.endpointId WHERE projectId=${req.params.id} AND domain="${req.body.selectedDomain}" GROUP BY Endpoints.id;`, function(err, rows2, fields) {
 		if (err) {
 			res.status(500).json({"status_code": 500,"status_message": err.message});
 		} else {			
@@ -291,6 +292,7 @@ router.post('/:id/allendpointsByDomain', function(req, res, next) {
 					'pathUI':rows2[i].pathUi,
 					'domain':rows2[i].domain,
 					'endpoint':rows2[i].Endpoint,
+					'environment':rows2[i].environment,
 					'testCheck':rows2[i].testCheck,
 					'countParameters':rows2[i].countParameters
 				}
@@ -306,7 +308,7 @@ router.post('/:id/filterByCheck', function(req, res, next) {
 	var endpointList = [];
 	var connection = config.getMySQLConnection();
 	connection.connect();
-	connection.query(`SELECT Endpoints.id, Endpoints.pathUi, Endpoints.domain, Endpoints.Endpoint, Endpoints.testCheck, COUNT(Parameters.id) AS countParameters FROM Endpoints LEFT JOIN Parameters ON Endpoints.id = Parameters.endpointId WHERE projectId=${req.params.id} AND testCheck="${req.body.selectedTestCheck}" GROUP BY Endpoints.id;`, function(err, rows2, fields) {
+	connection.query(`SELECT Endpoints.id, Endpoints.pathUi, Endpoints.domain, Endpoints.Endpoint, Endpoints.environment, Endpoints.testCheck, COUNT(Parameters.id) AS countParameters FROM Endpoints LEFT JOIN Parameters ON Endpoints.id = Parameters.endpointId WHERE projectId=${req.params.id} AND testCheck="${req.body.selectedTestCheck}" GROUP BY Endpoints.id;`, function(err, rows2, fields) {
 		if (err) {
 			res.status(500).json({"status_code": 500,"status_message": err.message});
 		} else {			
@@ -316,6 +318,7 @@ router.post('/:id/filterByCheck', function(req, res, next) {
 					'pathUI':rows2[i].pathUi,
 					'domain':rows2[i].domain,
 					'endpoint':rows2[i].Endpoint,
+					'environment':rows2[i].environment,
 					'testCheck':rows2[i].testCheck,
 					'countParameters':rows2[i].countParameters
 				}
@@ -397,6 +400,7 @@ router.get('/:id/:idendpoint', function(req, res, next) {
 					'apiDescription':rows[0].ApiDescription,
 					'creationDate':rows[0].creationDate,
 					'projectId':rows[0].projectId,
+					'environment':rows[0].environment,
 					'testCheck':rows[0].testCheck
 				}
 				endpointList.push(endpoint);
@@ -415,7 +419,7 @@ router.put('/:id/:idendpoint', function (req, res) {
 	var error = '';
 	var connection = config.getMySQLConnection();
 	connection.connect();
-	connection.query(`UPDATE Endpoints SET pathUi='${req.body.pathUI}', domain='${req.body.domain}', Endpoint='${req.body.endpoint}', ApiDescription='${req.body.apiDescription}', projectId=${req.params.id} WHERE id=${req.params.idendpoint}`, function(err, rows) {
+	connection.query(`UPDATE Endpoints SET pathUi='${req.body.pathUI}', domain='${req.body.domain}', Endpoint='${req.body.endpoint}', ApiDescription='${req.body.apiDescription}', environment='${req.body.environment}', projectId=${req.params.id} WHERE id=${req.params.idendpoint}`, function(err, rows) {
 		if (err) {
 			error += err.message;
 		} else {

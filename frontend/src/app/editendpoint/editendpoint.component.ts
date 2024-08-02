@@ -35,6 +35,7 @@ export class EditendpointComponent implements OnInit {
       endpoint: new FormControl(),
       apiDescription: new FormControl(),
       linkedEndpointID: new FormControl(),
+      environment: new FormControl()
     })
 
     this.endpoints.getEndpointsProjectByIdEndpoint(this.id!, this.idendpoint!).subscribe(res => {
@@ -57,7 +58,8 @@ export class EditendpointComponent implements OnInit {
       this.updateEndpointForm.value.domain,
       this.updateEndpointForm.value.endpoint,
       this.updateEndpointForm.value.apiDescription,
-      this.updateEndpointForm.value.linkedEndpointID
+      this.updateEndpointForm.value.linkedEndpointID,
+      this.updateEndpointForm.value.environment
     ).subscribe(res => {
       alert(res);
       console.log(res);

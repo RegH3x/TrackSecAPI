@@ -42,6 +42,7 @@ export class ProjectComponent implements OnInit {
       endpoint: new FormControl(null, Validators.required),
       apiDescription: new FormControl(null),
       linkedEndpointID: new FormControl(null),
+      environment: new FormControl(null)
     })
 
     this.endpoints.getEndpointsProject(this.id!).subscribe(res => {
@@ -65,7 +66,8 @@ export class ProjectComponent implements OnInit {
       this.addEndpointForm.value.domain,
       this.addEndpointForm.value.endpoint,
       this.addEndpointForm.value.apiDescription,
-      this.addEndpointForm.value.linkedEndpointID
+      this.addEndpointForm.value.linkedEndpointID,
+      this.addEndpointForm.value.environment
     ).subscribe(res => {
       alert(res);
       console.log(res);
